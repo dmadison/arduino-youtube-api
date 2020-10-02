@@ -37,31 +37,30 @@
 
 #define YTAPI_CHANNEL_ENDPOINT "/youtube/v3/channels"
 
-struct channelStatistics{
-  long viewCount;
-  long commentCount; /* DEPRECATED */
-  long subscriberCount;
-  bool hiddenSubscriberCount;
-  long videoCount;
+struct channelStatistics {
+	long viewCount;
+	long commentCount;  /* DEPRECATED */
+	long subscriberCount;
+	bool hiddenSubscriberCount;
+	long videoCount;
 };
 
 class YoutubeApi
 {
-  public:
-    YoutubeApi (char *apiKey, Client &client);
-    YoutubeApi (String apiKey, Client &client);
-    int sendGetToYoutube(char *command);
-    bool getChannelStatistics(char *channelId);
-    bool getChannelStatistics(String channelId);
-    channelStatistics channelStats;
-    bool _debug = false;
+	public:
+		YoutubeApi (const char *key, Client &client);
+		int sendGetToYoutube(const char *command);
+		bool getChannelStatistics(const char *channelId);
+		bool getChannelStatistics(String channelId);
+		channelStatistics channelStats;
+		bool _debug = false;
 
-  private:
-    char *_apiKey;
-    Client *client;
-    int getHttpStatusCode();
-    void skipHeaders();
-    void closeClient();
+	private:
+		const char *apiKey;
+		Client &client;
+		int getHttpStatusCode();
+		void skipHeaders();
+		void closeClient();
 };
 
 #endif
